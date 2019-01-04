@@ -166,14 +166,16 @@ var mqtt={
 		);
 	},
 
-  disconnect: function(){
+  disconnect: function(callback){
     cordova.exec(
       function(success){
         console.log("Disconnected.");
         mqtt.onDisconnect();
+	callback && callback()      
       }, 
       function(err) {
         mqtt.onDisconnectError();
+	callback && callback()  
       }, 
       "MQTTPlugin", "disconnect", []);
   },
