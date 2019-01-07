@@ -19,6 +19,12 @@
 
   onConnectCallbackId = command.callbackId;
 
+  if(session.status == 2){
+      NSLog(@"status: %ld", session.status);
+      [self.commandDelegate evalJs:[NSString stringWithFormat:@"mqtt.onConnectError();"]];
+      return;
+  }
+
   [self.commandDelegate runInBackground:^{
   NSDictionary* options = nil;
   NSDictionary* will = nil;
